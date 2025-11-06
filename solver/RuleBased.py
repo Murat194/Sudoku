@@ -32,7 +32,7 @@ def apply_constraints(grid):
                             return False
                         changed = True
 
-# 2. Naked Pairs
+# 2. Naked Pairs - 07.11.25
 # Если в юните две клетки имеют одинаковые 2 кандидата, 
 # и больше нигде в юните они не встречаются, то убираем эти 2 кандидата из всех других клеток юнита.
         for u in unitlist:
@@ -68,7 +68,7 @@ def apply_constraints(grid):
                         grid[s] = d
                         changed = True
 
-# 4. Hidden Pairs
+# 4. Hidden Pairs - 07.11.25
 # Если в юните есть 2 цифры, которые возможны только в 2 клетках,
 # и больше нигде в юните, то убираем из этих 2 клеток все другие кандидаты.
         for u in unitlist:
@@ -109,3 +109,4 @@ def solve_puzzle(puzzle_str, use_backtrack_fallback=True):
     else:
 
         return None
+
