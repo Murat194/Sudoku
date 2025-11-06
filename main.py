@@ -3,6 +3,7 @@ from solver.Backtracking import solve_puzzle as solve1
 from solver.RuleBased import solve_puzzle as solve2
 from solver.Bolztman import solve_puzzle as solve3
 from solver.AlgorithmX import solve_puzzle as solve4
+from metrics import evaluate_solver
 
 def format_sudoku_picture(puzzle_str):
     if puzzle_str is None:
@@ -26,31 +27,15 @@ def format_sudoku_picture(puzzle_str):
     return "\n".join(result)
 
 if __name__ == "__main__":
-    puzzle_str, solution_str = generate_puzzle(num_clues=81) # num_clues = количество подсказок = сложность (минимум 17, максимум 81)
+    puzzle_str, solution_str = generate_puzzle(num_clues=81) 
+    # num_clues = количество подсказок = сложность (минимум 17, максимум 81)
     
     print("sudoku:")
     print(format_sudoku_picture(puzzle_str))
     print("\nsolve:")
     print(format_sudoku_picture(solution_str))
 
-    solvers = [
-        ("backtracking", solve1),
-        ("rulebased", solve2),
-        ("boltzman", solve3),
-        ("algorithmx", solve4),
-    ]
-
-    for name, solver_func in solvers:
-        print(f"solver: {name}")
-        try:
-            result = solver_func(puzzle_str)
-            if result == solution_str:
-                status = "solved"
-            elif result is not None:
-                status = "not solved"
-            else:
-                status = "fail"
-            print(f"status: {status}")
-        except Exception as e:
-            print(f"fail: {name}: {e}")
-            print("net solve")
+    evaluate_solver(solve1, "backtracking", puzzle_str, solution_str)
+    evaluate_solver(solve2, "rulebased", puzzle_str, solution_str)
+    evaluate_solver(solve3, "boltzman", puzzle_str, solution_str)
+    evaluate_solver(solve4, "algorithmx", puzzle_str, solution_str)
