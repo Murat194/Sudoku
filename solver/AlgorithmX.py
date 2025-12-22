@@ -1,5 +1,3 @@
-from itertools import product
-
 def solve_puzzle(puzzle_str):
 
     def encode(row, col, digit):
